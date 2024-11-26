@@ -1,0 +1,15 @@
+syntax = "proto3";
+package com.nagaraj.projects.grpc;
+option java_multiple_files = true;
+option java_package = "com.nagaraj.projects.grpc";
+
+service GreetingsService{
+    rpc Greeting(GreetingRequest) returns (GreetingResponse);
+}
+
+message GreetingRequest{
+    string greeting_message = 1;
+}
+message GreetingResponse{
+    string greeting_message = 1;
+}

@@ -1,0 +1,42 @@
+
+buildscript {
+	ext {
+		springBootVersion = '3.4.0'
+		springBootGrpcVersion = '3.1.0.RELEASE'
+	}
+
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.0'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+apply plugin: 'idea'
+
+group = 'com.nagaraj.projects'
+version = '0.0.1-SNAPSHOT'
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation("org.springframework.boot:spring-boot-starter")
+	implementation("net.devh:grpc-server-spring-boot-starter:${springBootGrpcVersion}")
+	implementation project(':greetings-common')
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+

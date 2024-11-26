@@ -1,0 +1,3 @@
+rootProject.name = 'greetings-example'
+
+include 'greetings-common', 'greetings-service'
