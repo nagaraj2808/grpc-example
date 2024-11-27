@@ -1,15 +1,15 @@
-.idea
+../.idea
 greetings-example/.gradle/
 greetings-example/build/
-greetings-example/greetings-common/build
-greetings-example/greetings-common/src/generated
+greetings-common/build
+greetings-common/src/generated
 HELP.md
 .gradle
 build/
-!gradle/wrapper/gradle-wrapper.jar
+gradle/
+**/gradle
 !**/src/main/**/build/
 !**/src/test/**/build/
-
 ### STS ###
 .apt_generated
 .classpath
