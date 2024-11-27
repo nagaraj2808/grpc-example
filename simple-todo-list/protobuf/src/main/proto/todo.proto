@@ -1,0 +1,27 @@
+syntax = "proto3";
+package com.nagaraj.projects.todoservice;
+option java_multiple_files = true;
+option java_package = "com.nagaraj.projects.proto.todoservice";
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+service ToDoListService{
+    rpc CreateTodo(CreateTodoRequest) returns (Todo){
+        option (google.api.http) = {
+            post: "/todo-service/todos",
+            body: "*"
+        };
+    };
+}
+
+message CreateTodoRequest{
+    string title = 1;
+    bool done = 2;
+}
+
+message Todo{
+    string todo_id = 1;
+    string title = 2;
+    bool done = 3;
+    google.protobuf.Timestamp created_time = 4;
+    google.protobuf.Timestamp updated_time = 5;
+}
