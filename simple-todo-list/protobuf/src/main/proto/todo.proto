@@ -20,7 +20,6 @@ service ToDoListService{
 
 message CreateTodoRequest{
     string title = 1;
-    bool done = 2;
 }
 
 message Todo{
