@@ -1,9 +1,6 @@
 package com.nagaraj.projects.todoservice.resources;
 
-import com.nagaraj.projects.proto.todoservice.CreateTodoRequest;
-import com.nagaraj.projects.proto.todoservice.GetTodoRequest;
-import com.nagaraj.projects.proto.todoservice.ToDoListServiceGrpc;
-import com.nagaraj.projects.proto.todoservice.Todo;
+import com.nagaraj.projects.proto.todoservice.*;
 import com.nagaraj.projects.todoservice.converters.TodoConverter;
 import com.nagaraj.projects.todoservice.services.TodoService;
 import io.grpc.Status;
@@ -13,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+
 @GrpcService
 @Slf4j
 public class TodoListServiceImpl extends ToDoListServiceGrpc.ToDoListServiceImplBase {
@@ -53,6 +53,16 @@ public class TodoListServiceImpl extends ToDoListServiceGrpc.ToDoListServiceImpl
             log.error(statusException.getMessage());
             responseObserver.onError(statusException);
         }
+    }
+
+    @Override
+    public void listTodo(ListTodoRequest request, StreamObserver<ListTodoResponse> responseObserver) {
+        List<com.nagaraj.projects.todoservice.domains.Todo> todos = todoService.listTodos();
+        var response = ListTodoResponse.newBuilder()
+                        .addAllTodos(todos.stream().map(TodoConverter::fromEntityToProto).toList())
+                        .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
 

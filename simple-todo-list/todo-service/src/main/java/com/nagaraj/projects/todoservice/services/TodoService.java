@@ -7,7 +7,7 @@ import io.grpc.Status;
 import io.grpc.StatusException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 @Service
 public class TodoService {
 
@@ -31,5 +31,9 @@ public class TodoService {
             throw new StatusException(Status.NOT_FOUND.withDescription("Todo with " +  todoId + " not found"));
         }
         return todo;
+    }
+
+    public List<Todo> listTodos() {
+        return todoRepository.findAll();
     }
 }
