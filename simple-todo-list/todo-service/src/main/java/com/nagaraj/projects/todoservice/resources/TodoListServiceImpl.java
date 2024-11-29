@@ -1,6 +1,7 @@
 package com.nagaraj.projects.todoservice.resources;
 
 import com.nagaraj.projects.proto.todoservice.CreateTodoRequest;
+import com.nagaraj.projects.proto.todoservice.GetTodoRequest;
 import com.nagaraj.projects.proto.todoservice.ToDoListServiceGrpc;
 import com.nagaraj.projects.proto.todoservice.Todo;
 import com.nagaraj.projects.todoservice.converters.TodoConverter;
@@ -37,4 +38,22 @@ public class TodoListServiceImpl extends ToDoListServiceGrpc.ToDoListServiceImpl
             responseObserver.onError(statusException);
         }
     }
+
+    @Override
+    public void getTodo(GetTodoRequest request, StreamObserver<Todo> responseObserver) {
+        try{
+            String todoId = request.getTodoId().trim();
+            if(StringUtils.isBlank(todoId)){
+                throw new StatusException(Status.INVALID_ARGUMENT.withDescription("todoId should not be empty"));
+            }
+            Todo todo = TodoConverter.fromEntityToProto(todoService.getTodo(todoId));
+            responseObserver.onNext(todo);
+            responseObserver.onCompleted();
+        } catch (StatusException statusException){
+            log.error(statusException.getMessage());
+            responseObserver.onError(statusException);
+        }
+    }
+
+
 }

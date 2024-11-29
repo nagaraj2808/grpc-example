@@ -16,6 +16,12 @@ service ToDoListService{
             body: "*"
         };
     };
+
+    rpc GetTodo(GetTodoRequest) returns (Todo){
+        option (google.api.http) = {
+            get: "/todo-service/todos/{todoId}"
+        };
+    }
 }
 
 message CreateTodoRequest{
@@ -28,4 +34,8 @@ message Todo{
     bool done = 3;
     google.protobuf.Timestamp created_time = 4;
     google.protobuf.Timestamp updated_time = 5;
+}
+
+message GetTodoRequest{
+    string todo_id = 1;
 }
