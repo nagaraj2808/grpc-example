@@ -65,5 +65,16 @@ public class TodoListServiceImpl extends ToDoListServiceGrpc.ToDoListServiceImpl
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void updateTodo(UpdateTodoRequest request, StreamObserver<Todo> responseObserver) {
+        try {
+            com.nagaraj.projects.todoservice.domains.Todo updatedTodo = todoService.updateTodo(request);
+            responseObserver.onNext(TodoConverter.fromEntityToProto(updatedTodo));
+            responseObserver.onCompleted();
+        } catch (StatusException e) {
+            log.error(e.getMessage());
+        }
+    }
+
 
 }
