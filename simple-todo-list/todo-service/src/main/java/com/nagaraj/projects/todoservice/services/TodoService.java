@@ -52,4 +52,12 @@ public class TodoService {
         }
        return todoRepository.save(todo);
     }
+
+    public void deleteTodo(String todoId) throws StatusException{
+        Todo todo = todoRepository.findByTodoId(todoId).orElse(null);
+        if(todo == null) {
+            throw new StatusException(Status.NOT_FOUND.withDescription("Todo not found"));
+        }
+        todoRepository.deleteById(todoId);
+    }
 }

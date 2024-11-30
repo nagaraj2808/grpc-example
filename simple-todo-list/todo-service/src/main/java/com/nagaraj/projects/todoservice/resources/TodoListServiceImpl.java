@@ -1,5 +1,6 @@
 package com.nagaraj.projects.todoservice.resources;
 
+import com.google.protobuf.Empty;
 import com.nagaraj.projects.proto.todoservice.*;
 import com.nagaraj.projects.todoservice.converters.TodoConverter;
 import com.nagaraj.projects.todoservice.services.TodoService;
@@ -74,6 +75,22 @@ public class TodoListServiceImpl extends ToDoListServiceGrpc.ToDoListServiceImpl
         } catch (StatusException e) {
             log.error(e.getMessage());
         }
+    }
+
+    @Override
+    public void deleteTodo(DeleteTodoRequest request, StreamObserver<Empty> responseObserver) {
+        try {
+            String todoId = request.getTodoId();
+            if(StringUtils.isBlank(todoId)){
+                throw new StatusException(Status.INVALID_ARGUMENT.withDescription("todoId cannot be empty"));
+            }
+            todoService.deleteTodo(todoId);
+            responseObserver.onNext(Empty.newBuilder().build());
+            responseObserver.onCompleted();
+        } catch (StatusException statusException){
+            responseObserver.onError(statusException);
+        }
+
     }
 
 

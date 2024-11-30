@@ -3,6 +3,7 @@ package com.nagaraj.projects.todoservice;
 
 
 import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -34,6 +35,11 @@ service ToDoListService{
         option (google.api.http) = {
             patch: "todo-service/todos/{todoId}"
             body: "*"
+        };
+    }
+    rpc DeleteTodo(DeleteTodoRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            delete: "todo-service/todos/{todoId}"
         };
     }
 }
@@ -68,4 +74,8 @@ message UpdateTodoRequest{
     string title = 2;
     //required = false
     google.protobuf.BoolValue done = 3;
+}
+
+message DeleteTodoRequest{
+    string todo_id = 1;
 }
