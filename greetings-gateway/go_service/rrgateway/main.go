@@ -3,14 +3,19 @@ package main
 import (
   "context"
   "flag"
+  "net/http"
   "github.com/golang/glog"
-  "github.com/nagaraj2808/grpc-example/rrgateway/gateway"  // Update
+ "google.golang.org/grpc"
+   "google.golang.org/grpc/credentials/insecure"
+ runtime "github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+  gw "github.com/nagaraj2808/grpc-example/greetings-gateway/go_service/rrgateway/gateway/proto"
 )
 
 var (
   // command-line options:
   // gRPC server endpoint
-  grpcServerEndpoint = flag.String("grpc-server-endpoint",  "localhost:9090", "gRPC server endpoint")
+  grpcServerEndpoint = flag.String("endpoint",  "localhost:9090", "gRPC server endpoint")
+
 )
 
 func run() error {
@@ -22,7 +27,7 @@ func run() error {
   // Note: Make sure the gRPC server is running properly and accessible
   mux := runtime.NewServeMux()
   opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
-  err := gw.RegisterYourServiceHandlerFromEndpoint(ctx, mux,  *grpcServerEndpoint, opts)
+  err := gw.RegisterGreetingsServiceHandlerFromEndpoint(ctx, mux,  *grpcServerEndpoint, opts)
   if err != nil {
     return err
   }
@@ -35,6 +40,6 @@ func main() {
   flag.Parse()
 
   if err := run(); err != nil {
-    grpclog.Fatal(err)
+    glog.Fatal(err)
   }
 }
