@@ -1,14 +1,20 @@
-version: v2
+version: v1
 plugins:
-  - local: protoc-gen-go
-    out: gen/go
+  - name: go
+    out: ../../../../go_service/rrgateway/gateway/proto
     opt:
       - paths=source_relative
-  - local: protoc-gen-go-grpc
-    out: gen/go
+  - name: go-grpc
+    out: ../../../../go_service/rrgateway/gateway/proto
     opt:
       - paths=source_relative
-  - local: protoc-gen-grpc-gateway
-    out: gen/go
+  - name: grpc-gateway
+    out: ../../../../go_service/rrgateway/gateway/proto
     opt:
       - paths=source_relative
+      - generate_unbound_methods=true
+      - allow_delete_body=true
+  - name: openapiv2
+    out: ../../../../gen/swagger
+    opt:
+      - allow_delete_body=true

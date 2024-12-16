@@ -1,4 +1,12 @@
-version: v2
-name: buf.build/com.nagaraj/projects
-deps:
-  - buf.build/googleapis/googleapis
+version: v1
+lint:
+  use:
+    - BASIC
+  except:
+    - RPC_PASCAL_CASE
+    - PACKAGE_SAME_JAVA_MULTIPLE_FILES
+    - PACKAGE_SAME_JAVA_PACKAGE
+    - PACKAGE_SAME_GO_PACKAGE
+    - PACKAGE_SAME_CSHARP_NAMESPACE
+  ignore:
+    - google

@@ -5,7 +5,7 @@ import "google/api/annotations.proto";
 
 option java_multiple_files = true;
 option java_package = "com.nagaraj.projects.grpc";
-option go_package = "com.nagaraj.projects.grpc/go";
+option go_package = "nagaraj2808/grpc-example/tree/grpc-gateway/greetings-gateway/go_service/gateway/proto";
 service GreetingsService{
     rpc Greeting(GreetingRequest) returns (GreetingResponse){
         option (google.api.http) = {

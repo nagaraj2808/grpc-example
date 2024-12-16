@@ -1,4 +1,4 @@
-module nagaraj2808/grpc-example/gateway
+module github.com/nagaraj2808/grpc-example/rrgateway
 
 go 1.23.3
 
@@ -10,6 +10,8 @@ require (
 	google.golang.org/grpc v1.62.0
 	google.golang.org/protobuf v1.32.0
 )
+
+require github.com/golang/glog v1.2.0
 
 require (
 	github.com/golang/protobuf v1.5.3 // indirect

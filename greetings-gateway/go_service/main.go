@@ -4,7 +4,7 @@ import (
   "context"
   "flag"
   "github.com/golang/glog"
-  "github.com/nagaraj2808/grpc-example/grpc-gateway/gateway"  // Update
+  "github.com/nagaraj2808/grpc-example/rrgateway/gateway"  // Update
 )
 
 var (
