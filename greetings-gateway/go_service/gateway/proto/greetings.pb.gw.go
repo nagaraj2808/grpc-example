@@ -2,11 +2,11 @@
 // source: greetings.proto
 
 /*
-Package _go is a reverse proxy.
+Package proto is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package _go
+package proto
 
 import (
 	"context"

@@ -3,14 +3,8 @@ package main
 import (
   "context"
   "flag"
-  "net/http"
-
-  "github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-  "google.golang.org/grpc"
-  "google.golang.org/grpc/credentials/insecure"
-  "google.golang.org/grpc/grpclog"
-
-  gw "github.com/yourorg/yourrepo/proto/gen/go/your/service/v1/your_service"  // Update
+  "github.com/golang/glog"
+  "github.com/nagaraj2808/grpc-example/grpc-gateway/gateway"  // Update
 )
 
 var (
